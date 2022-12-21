@@ -1,19 +1,20 @@
 package main
 
 import (
+	global "blog/global/setting"
+
 	"blog/internal/routers"
 	"net/http"
-	"time"
 )
 
 func main() {
 
 	router := routers.BlogRouter()
 	s := http.Server{
-		Addr:           ":8080",
+		Addr:           ":" + global.ServerSetting.HttpPort,
 		Handler:        router,
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
+		ReadTimeout:    global.ServerSetting.ReadTimeout,
+		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
 
