@@ -3,6 +3,7 @@ package main
 import (
 	global "blog/global/setting"
 
+	_ "blog/global/db"
 	"blog/internal/routers"
 	"net/http"
 )

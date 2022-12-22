@@ -11,8 +11,8 @@ App:  #應用設定
   LogFileExt: .log  #記錄檔副檔名
 Database: #資料庫設定
   DBType: mysql #資料庫種類
-  Username: xxxx  #資料庫帳號
-  Password: xxxxxx  #資料庫密碼
+  Username: root  #資料庫帳號
+  Password: "0966525307"  #資料庫密碼
   Host: 127.0.0.1:3306  #資料庫IP+Port
   DBName: blog  #資料庫名稱
   TablePrefix: blog_  #資料表前綴
