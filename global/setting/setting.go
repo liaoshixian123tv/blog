@@ -1,15 +1,20 @@
 package setting
 
 import (
+	"blog/pkg/logger"
 	"blog/pkg/setting"
 	"fmt"
+	"log"
 	"time"
+
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 var (
 	ServerSetting   *setting.ServerSettings
 	AppSetting      *setting.AppSettings
 	DatabaseSetting *setting.DatabaseSettings
+	Logger          *logger.Logger
 )
 
 var (
@@ -23,11 +28,14 @@ func init() {
 	ServerSetting = new(setting.ServerSettings)
 	AppSetting = new(setting.AppSettings)
 	DatabaseSetting = new(setting.DatabaseSettings)
-	setup()
+	Logger = new(logger.Logger)
+
+	setupSetting()
+	setupLogger()
 }
 
 // setup初始化設定
-func setup() error {
+func setupSetting() error {
 	settings, err := setting.NewSetting()
 	if err != nil {
 		return err
@@ -52,4 +60,16 @@ func setup() error {
 	fmt.Printf("AppSetting: %+v \n", AppSetting)
 	fmt.Printf("Database: %+v \n", DatabaseSetting)
 	return nil
+}
+
+func setupLogger() {
+	fileName := AppSetting.LogSavePath + "/" + AppSetting.LogFileName + AppSetting.LogFileExt
+	fmt.Println(fileName)
+	Logger = logger.NewLogger(&lumberjack.Logger{
+		Filename:  fileName,
+		MaxSize:   600,
+		MaxAge:    10,
+		LocalTime: true,
+	}, "", log.LstdFlags).WithCaller(2)
+
 }

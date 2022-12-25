@@ -16,7 +16,6 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettings) (*gorm.DB, error) {
 		databaseSetting.DBName,
 		databaseSetting.Charset,
 		databaseSetting.ParseTime)
-	fmt.Println("fniuodn ", s)
 	db, err := gorm.Open(databaseSetting.DBType, s)
 	if err != nil {
 		return nil, err
